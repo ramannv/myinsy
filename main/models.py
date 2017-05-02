@@ -33,7 +33,7 @@ SEX_CHOICES = (
     ('o', 'Others/Undefined'),
 )
 class User(models.Model):
-    regNo = models.CharField(max_length=10)
+    regNo = models.CharField(max_length=10, primary_key=True)
     name = models.CharField(max_length=30)
     sex = models.CharField(max_length=1, choices=SEX_CHOICES)
     dob = models.DateField(max_length=16)

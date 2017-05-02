@@ -1,19 +1,19 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, HttpResponseRedirect
 from .forms import *
 from .models import *
 # Create your views here.
 
 def user_create(request):
     form = UserForm(request.POST or None)
-    if request.method=="POST":
-        if form.is_valid():
-            instance = form.save(commit=False)
-            instance.save()
     context = {
         "form": form,
         "heading": "Create a user",
     }
-
+    if request.method=="POST":
+        if form.is_valid():
+            instance = form.save(commit=False)
+            instance.save()
+            return redirect(user_create)
     return render(request, "user_create.html", context)
 
 def attendance_create(request):
@@ -29,16 +29,17 @@ def attendance_create(request):
     return render(request, "attendance_create.html", context)
 
 def mark_create(request):
-
     form = MarkForm(request.POST or None)
-    if request.method=="POST":
-        if form.is_valid():
-            instance = form.save(commit=False)
-            instance.save()
     context = {
         "form": form,
         "heading": "Edit the marks",
     }
+    if request.method=="POST":
+        if form.is_valid():
+            instance = form.save(commit=False)
+            instance.save()
+        return render(request, "mark_create.html", context)
+
     return render(request, "mark_create.html", context)
 
 def view_details(request):
@@ -55,16 +56,25 @@ def cio_view(request):
         q = request.POST.get('query')
         q = q.split(' ')
         print q
+        #VIEW _
         if q[0] == "view":
-            regNo = str(q[2]).upper()
-            userset = User.objects.filter(regNo=regNo)
-            c = {
-            'regNo': regNo,
-            'userset': userset[0],
-            }
-            return render(request, "user_view.html", c)
+            if q[1] != "all":
+                regNo = str(q[2]).upper()
+                userset = User.objects.filter(regNo=regNo)
+                c = {
+                'regNo': regNo,
+                'userset': userset[0],
+                }
+                return render(request, "user_view.html", c)
+            else:
+                if len(q) is 2:
+                    print "ALL"
+                elif "student" in q[2]:
+                    print "student view all"
+                elif "facul" in q[2]:
+                    print "fac view all"
         if q[0] == "add":
-            if q[1] == "user":
+            if (q[1] == "user" or q[1]=="student" or q[1]=="faculty"):
                 return redirect(user_create)
             elif q[1] == "attendance":
                 return redirect(attendance_create)
