@@ -40,12 +40,25 @@ def mark_create(request):
     }
     return render(request, "mark_create.html", context)
 
-
+def view_details(request):
+    context = {
+        'regNo': 'regNo',
+    }
+    return render(request, "view.html", context)
 
 def cio_view(request):
     context = {
 
     }
     if request.method=="POST":
-        print request.POST
+        q = request.POST.get('query')
+        q = q.split(' ')
+        print q[0]
+        if q[0] == "view":
+            regNo = q[2]
+
+        if q[0] == "generate":
+            print "set to generate"
+
+
     return render(request, "cio.html", context)
