@@ -1,5 +1,6 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from .forms import *
+from .models import *
 # Create your views here.
 
 def user_create(request):
@@ -42,7 +43,7 @@ def mark_create(request):
 
 def view_details(request):
     context = {
-        'regNo': 'regNo',
+        'regNo': reg,
     }
     return render(request, "view.html", context)
 
@@ -53,9 +54,15 @@ def cio_view(request):
     if request.method=="POST":
         q = request.POST.get('query')
         q = q.split(' ')
-        print q[0]
+        print q
         if q[0] == "view":
-            regNo = q[2]
+            regNo = str(q[2])
+            userset = User.objects.filter(regNo=regNo)
+            c = {
+            'regNo': regNo,
+            'userset': userset[0],
+            }
+            return render(request, "user_view.html", c)
 
         if q[0] == "generate":
             print "set to generate"
