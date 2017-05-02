@@ -61,9 +61,9 @@ class Attendance(models.Model):
 
 class Mark(models.Model):
     regNo = models.ForeignKey(User, on_delete=models.CASCADE)
-    sub1 = models.IntegerField()
-    sub2 = models.IntegerField()
-    sub3 = models.IntegerField()
-    sub4 = models.IntegerField()
-    sub5 = models.IntegerField()
-    sub6 = models.IntegerField()
+    en14401 = models.IntegerField()
+    en14402 = models.IntegerField()
+    en14403 = models.IntegerField()
+    en14404 = models.IntegerField()
+    en14405 = models.IntegerField()
+    en14406 = models.IntegerField()

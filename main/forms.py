@@ -28,10 +28,10 @@ class MarkForm(forms.ModelForm):
         model = Mark
         fields = [
             'regNo',
-            'sub1',
-            'sub2',
-            'sub3',
-            'sub4',
-            'sub5',
-            'sub6'
+            'en14401',
+            'en14402',
+            'en14403',
+            'en14404',
+            'en14405',
+            'en14406',
         ]

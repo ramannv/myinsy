@@ -94,6 +94,10 @@ def cio_view(request):
                 return redirect(mark_create)
         if q[0] == "generate":
             print "set to generate"
+            regNo = str(q[2]).upper()
+            userset = User.objects.filter(regNo=regNo)
+            attendanceset = Attendance.objects.filter(regNo=regNo)
+            markset = Marks.objects.filter(regNo=regNo)
 
 
     return render(request, "cio.html", context)
