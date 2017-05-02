@@ -1,4 +1,5 @@
 from django.shortcuts import render, redirect, HttpResponseRedirect
+from django.views import generic
 from .forms import *
 from .models import *
 # Create your views here.
@@ -48,6 +49,7 @@ def view_details(request):
     }
     return render(request, "view.html", context)
 
+
 def cio_view(request):
     context = {
 
@@ -57,7 +59,9 @@ def cio_view(request):
         q = q.split(' ')
         print q
         #VIEW _
+
         if q[0] == "view":
+            #VIEW SPECIFIC
             if q[1] != "all":
                 regNo = str(q[2]).upper()
                 userset = User.objects.filter(regNo=regNo)
@@ -66,13 +70,21 @@ def cio_view(request):
                 'userset': userset[0],
                 }
                 return render(request, "user_view.html", c)
+            #VIEW ALL
             else:
+                #VIEW EVERYTHING
                 if len(q) is 2:
-                    print "ALL"
+                    queryset = User.objects.order_by('regNo')
+
+                    return render(request, "view_all.html", {'set': queryset})
+                #VIEW ALL STUDENTS
                 elif "student" in q[2]:
-                    print "student view all"
+                    queryset = User.objects.filter(usertype='S').order_by('regNo')
+                    return render(request, "view_all.html", {'set': queryset})
+                #VIEW ALL FACULTY
                 elif "facul" in q[2]:
-                    print "fac view all"
+                    queryset = User.objects.filter(usertype='F').order_by('regNo')
+                    return render(request, "view_all.html", {'set': queryset})
         if q[0] == "add":
             if (q[1] == "user" or q[1]=="student" or q[1]=="faculty"):
                 return redirect(user_create)

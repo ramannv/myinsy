@@ -5,7 +5,7 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300" rel="stylesheet">
 
-    <title></title>
+    <title>View all</title>
   </head>
   <body>
     <div class="jumbotron">
@@ -14,15 +14,17 @@
       </div>
 
     </div>
-    <div class="container">
-      <h1>{{regNo}}</h1>
-      <h2>{{userset.name}}</h2>
-      <h2>{{userset.sex}}</h2>
-      <h2>{{userset.dob}}</h2>
-      <h2>{{userset.dept}}</h2>
-      <h2>{{userset.usertype}}</h2>
-      <h2>{{userset.phoneNo}}</h2>
 
+    <div class="container">
+
+
+        View all
+        <hr>
+      <ol>
+      {% for i in set %}
+        <li>{{i}} ({{i.usertype}}) </li>
+      {% endfor %}
+    </ol>
     </div>
 
   </body>
