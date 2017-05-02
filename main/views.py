@@ -3,7 +3,6 @@ from .forms import *
 # Create your views here.
 
 def user_create(request):
-
     form = UserForm(request.POST or None)
     if request.method=="POST":
         if form.is_valid():
@@ -13,10 +12,10 @@ def user_create(request):
         "form": form,
         "heading": "Create a user",
     }
+
     return render(request, "user_create.html", context)
 
 def attendance_create(request):
-
     form = AttendanceForm(request.POST or None)
     if request.method=="POST":
         if form.is_valid():
@@ -40,3 +39,13 @@ def mark_create(request):
         "heading": "Edit the marks",
     }
     return render(request, "mark_create.html", context)
+
+
+
+def cio_view(request):
+    context = {
+
+    }
+    if request.method=="POST":
+        print request.POST
+    return render(request, "cio.html", context)

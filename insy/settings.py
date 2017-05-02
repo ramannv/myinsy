@@ -70,9 +70,6 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'insy.wsgi.application'
 
-FILE_UPLOAD_HANDLERS = ("django_excel.ExcelMemoryFileUploadHandler",
-                        "django_excel.TemporaryExcelFileUploadHandler")
-
 # Database
 # https://docs.djangoproject.com/en/1.10/ref/settings/#databases
 
